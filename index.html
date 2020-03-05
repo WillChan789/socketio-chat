@@ -63,6 +63,8 @@
                 $('form').submit(function(e){
                     e.preventDefault();     //prevents page reloading
                     if ($('#m').val().includes("/nickcolor")) {
+                        //regex inspired from stack overflow:
+                        //https://stackoverflow.com/questions/8027423/how-to-check-if-a-string-is-a-valid-hex-color-representation/8027444
                         if (!/^[0-9A-F]{6}$/i.test($('#m').val().split(" ")[1])) {
                             $('#messages').append($('<li>').text('Invalid color. '));
                             $('#messages').animate({scrollTop: $('#messages').prop("scrollHeight")}, 0);
