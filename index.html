@@ -23,7 +23,7 @@
             }
 
             #messages {
-                list-style-type: none; margin: .5% .5%; padding: 0; border: solid 1px black; width: 70%; background-color: lightblue; height: 90vh; overflow: auto; float: left;
+                list-style-type: none; margin: .5% .5%; padding: 0; border: solid 1px black; width: 70%; background-color: lightblue; height: 85vh; overflow: auto; float: left;
                 display: flex; flex-direction: column;
             }
             #messages li {
@@ -36,10 +36,13 @@
                 background: papayawhip;
             }
             #online {
-                list-style-type: none; margin: .5% .5%; padding: 1%; border: solid 1px black; width: 28%; background-color: lightblue; height: 90vh; overflow: auto; float: left;
+                list-style-type: none; margin: .5% .5%; padding: 1%; border: solid 1px black; width: 28%; background-color: lightblue; height: 85vh; overflow: auto; float: left;
             }
             #online li:first-child {
                 font-weight: bold; text-decoration: underline;
+            }
+            #u {
+                margin: 0;
             }
         </style>
     </head>
@@ -47,7 +50,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+        <p id="u"></p>
         <ul id="messages" >
         </ul>
         <ul id="online">
@@ -79,6 +82,7 @@
                             $('#messages').animate({scrollTop: $('#messages').prop("scrollHeight")}, 0);
                         } else {
                             socket.id = $('#m').val().split(" ")[1];
+                            $('#u').text('You are User ' + socket.id + '. ');
                             socket.emit('nick', $('#m').val().split(" ")[1]);
                         }
                     } else if ($('#m').val()[0] == "/") {
@@ -93,6 +97,7 @@
                 });
 
                 socket.on('identify', () => {
+                    $('#u').text('You are User ' + socket.id + '. ');
                     $('#messages').append($('<li>').text('You are User ' + socket.id + '. '));
                     $('#messages').animate({scrollTop: $('#messages').prop("scrollHeight")}, 0);
 
